@@ -30,13 +30,13 @@
               <div class="col-md-4">
                   <div class="withdraw status">
                     <h5>Withdraw</h5>
-                    <h2>$00</h2>
+                    <h2>$<span id="withdrawBalance">00</span> </h2>
                   </div>
               </div>
               <div class="col-md-4">
                  <div class="balance status">
                     <h5>Balance</h5>
-                    <h2>$1500</h2>
+                    <h2>$ <span id="current-balance">1500</span> </h2>
                  </div>
               </div>
           </div>
@@ -44,15 +44,15 @@
               <div class="col-md-6">
                  <div class="submit-area">
                     <h4>Deposit</h4>
-                    <input type="text" id="deposit-amount" class="form-control"  placeholder="$ amount you want to deposit"><br>
+                    <input type="text" id="deposit-amount" class="form-control" ><br>
                     <button id="deposit-area" class="btn btn-success">Deposit</button>
                  </div>
               </div>
               <div class="col-md-6">
                   <div class="submit-area">
                     <h4>Withdraw</h4>
-                    <input type="text" class="form-control" placeholder="$ amount you want to withdraw"><br>
-                    <button class="btn btn-success">Withdraw</button>
+                    <input type="text" name="" id="withdraw-amount"  class="form-control"> <br>
+                    <button id="withdraw" class="btn btn-success">Withdraw</button>
                   </div>
               </div>
           </div>
@@ -86,7 +86,40 @@
                //print the deposit amount
                 document.getElementById("deposit-exist").innerHTML=totalDeposit;
                 //after add any deposit the value is set to null
-                document.getElementById("deposit-amount").value = "";
+
+                const currentBalance = document.getElementById("current-balance").innerText;
+                const balanceUpdate = parseFloat(currentBalance);
+
+                const totalBalance = inputValue+balanceUpdate;
+                document.getElementById("current-balance").innerHTML=totalBalance;
+                document.getElementById("deposit-amount").value = " ";
+
+           })
+
+           //withdraw event handeler
+
+           const withdrawAmount = document.getElementById("withdraw");
+           withdrawAmount.addEventListener("click",function(){
+
+             
+               const withdrawNumber = document.getElementById("withdraw-amount").value;
+               const getInput = parseFloat(withdrawNumber);
+
+               const withdrawPrev = document.getElementById("withdrawBalance").innerText;
+               const withdrawExist = parseFloat(withdrawPrev);
+               const totalWithdraw = withdrawExist+getInput;
+
+               document.getElementById("withdrawBalance").innerHTML= totalWithdraw;
+
+               //total balance update 
+                 
+                const currentBalance = document.getElementById("current-balance").innerText;
+                const balanceUpdate = parseFloat(currentBalance);
+
+                const totalWithAmount = balanceUpdate-getInput;
+                document.getElementById("current-balance").innerHTML=totalWithAmount ;
+                document.getElementById("withdraw-amount").value = " ";
+             
 
            })
            
